@@ -65,7 +65,7 @@ class HomeFragment:Fragment() {
         RvProdukLaptop=view.findViewById(R.id.Rv_ProdukLaptop)
         val layoutmanager2 = LinearLayoutManager(activity)
         layoutmanager2.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukLaptop.adapter=ProdukLaptopAdapter(arrproduk)
+        RvProdukLaptop.adapter=ProdukLaptopAdapter(arrproduk1)
         RvProdukLaptop.layoutManager=layoutmanager2
     }
     val arrproduk:ArrayList<ProduckEletronikModel>get() {
@@ -84,6 +84,29 @@ class HomeFragment:Fragment() {
         p3.name="Laptop Xp Envy"
         p3.harga="Rp.15.000.000"
         p3.gambar=R.drawable.rv3
+        arr.add(p1)
+        arr.add(p2)
+        arr.add(p3)
+        return  arr
+    }
+    val arrproduk1:ArrayList<ProduckEletronikModel>get() {
+        val arr=ArrayList<ProduckEletronikModel>()
+        val p1 = ProduckEletronikModel()
+        p1.name="Laptop Tuf Gamming"
+        p1.harga="Rp.11.000.000"
+        p1.gambar=R.drawable.rv3
+
+
+        val p2 = ProduckEletronikModel()
+        p2.name="Laptop AlienWare"
+        p2.harga="Rp.18.000.000"
+        p2.gambar=R.drawable.rv1
+
+        val p3 = ProduckEletronikModel()
+        p3.name="Laptop Msi Limmites"
+        p3.harga="Rp.15.000.000"
+        p3.gambar=R.drawable.rv2
+
         arr.add(p1)
         arr.add(p2)
         arr.add(p3)
