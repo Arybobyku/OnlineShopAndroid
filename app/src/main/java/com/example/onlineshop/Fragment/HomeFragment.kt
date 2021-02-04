@@ -99,7 +99,7 @@ class HomeFragment:Fragment() {
 
         val p2 = ProduckEletronikModel()
         p2.name="Laptop AlienWare"
-        p2.harga="Rp.18.000.000"
+        p2.harga="Rp.45.000.000"
         p2.gambar=R.drawable.rv1
 
         val p3 = ProduckEletronikModel()
