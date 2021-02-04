@@ -6,6 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onlineshop.R
+import com.example.onlineshop.app.ApiConfig
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity: AppCompatActivity()  {
     lateinit var btn_register: Button
@@ -47,5 +52,17 @@ class RegisterActivity: AppCompatActivity()  {
             password.requestFocus()
             return
         }
+
+        ApiConfig.instanceRetrofit.register(email.text.toString(),fullname.text.toString(),password.text.toString()).enqueue(object :Callback<ResponseBody>{
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+              //handel ketika gagal
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+              //handel ketika sukses
+            }
+
+        })
+
     }
 }
