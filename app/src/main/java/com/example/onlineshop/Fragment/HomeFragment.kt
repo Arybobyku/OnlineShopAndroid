@@ -104,7 +104,7 @@ class HomeFragment:Fragment() {
 
         val p3 = ProduckEletronikModel()
         p3.name="Laptop Msi Limmites"
-        p3.harga="Rp.15.000.000"
+        p3.harga="Rp.11.000.000"
         p3.gambar=R.drawable.rv2
 
         arr.add(p1)
