@@ -19,12 +19,17 @@ class AkunFragment :Fragment(){
         val view:View =  inflater.inflate(R.layout.fragment_akun, container, false)
 
         sp= SharedPref(requireActivity())
-            btn_LogOut = view.findViewById(R.id.Btn_LogOut)
-            btn_LogOut.setOnClickListener(View.OnClickListener {
-                sp.statusLogin(false)
-            })
-
+        mainButton(view)
         return view
+    }
+
+    fun mainButton(view:View){
+        //Button Keluar
+        btn_LogOut = view.findViewById(R.id.Btn_LogOut)
+        btn_LogOut.setOnClickListener(View.OnClickListener {
+            sp.statusLogin(false)
+        })
+
     }
 
 }
