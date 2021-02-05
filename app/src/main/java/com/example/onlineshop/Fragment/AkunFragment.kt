@@ -1,11 +1,14 @@
 package com.example.onlineshop.Fragment
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.onlineshop.Activity.LoginActivity
 import com.example.onlineshop.Helper.SharedPref
 import com.example.onlineshop.R
 
@@ -28,6 +31,7 @@ class AkunFragment :Fragment(){
         btn_LogOut = view.findViewById(R.id.Btn_LogOut)
         btn_LogOut.setOnClickListener(View.OnClickListener {
             sp.statusLogin(false)
+            startActivity(Intent(activity,LoginActivity::class.java))
         })
 
     }

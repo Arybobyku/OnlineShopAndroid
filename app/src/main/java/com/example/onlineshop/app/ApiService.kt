@@ -17,11 +17,11 @@ interface ApiService {
         @Field("password") password:String
     ):Call<ResponseModel>
 
+    @FormUrlEncoded
     @POST("login")
     fun login(
-        @Field("name") name:String,
         @Field("email") email:String,
         @Field("password") password:String
 
-    ):Call<ResponseBody>
+    ):Call<ResponseModel>
 }
