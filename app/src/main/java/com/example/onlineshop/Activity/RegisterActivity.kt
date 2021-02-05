@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onlineshop.R
 import com.example.onlineshop.app.ApiConfig
+import com.example.onlineshop.model.ResponseModel
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,13 +55,18 @@ class RegisterActivity: AppCompatActivity()  {
             return
         }
 
-        ApiConfig.instanceRetrofit.register(email.text.toString(),fullname.text.toString(),password.text.toString()).enqueue(object :Callback<ResponseBody>{
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-              //handel ketika gagal
+        ApiConfig.instanceRetrofit.register(fullname.text.toString(),email.text.toString(),password.text.toString()).enqueue(object :Callback<ResponseModel>{
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Toast.makeText(this@RegisterActivity,"Error: "+t,Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-              //handel ketika sukses
+            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                val respon = response.body()!!
+                if(respon.success==1){
+                    Toast.makeText(this@RegisterActivity,"Selamat Datang: "+respon.user.name,Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this@RegisterActivity,"Error: "+respon.message,Toast.LENGTH_SHORT).show()
+                }
             }
 
         })
