@@ -33,8 +33,17 @@ class AkunFragment :Fragment(){
     }
     fun setData(){
 
-        name.text = sp.getString(sp.nama)
-        email.text = sp.getString(sp.email)
+        if(sp.getUser() == null){
+            val move = Intent(activity,LoginActivity::class.java)
+            move.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(move)
+        }else{
+            val user = sp.getUser()!!
+            name.text =user.name
+            email.text =user.email
+        }
+
+
 
     }
     fun mainButton(view:View){

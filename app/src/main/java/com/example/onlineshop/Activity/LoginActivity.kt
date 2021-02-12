@@ -69,8 +69,10 @@ class LoginActivity : AppCompatActivity() {
                     pb_login.visibility = View.GONE
                     Toast.makeText(this@LoginActivity,respon.message,Toast.LENGTH_LONG).show()
                     sp.statusLogin(true)
-                    sp.setString(sp.nama,respon.user.name)
-                    sp.setString(sp.email,respon.user.email)
+                    //cara manual
+//                    sp.setString(sp.nama,respon.user.name)
+//                    sp.setString(sp.email,respon.user.email)
+                    sp.setUser(respon.user)
                     val move:Intent= Intent(this@LoginActivity,MainActivity::class.java)
                     //menghapus acticity flag yg ada di cache
                     move.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
