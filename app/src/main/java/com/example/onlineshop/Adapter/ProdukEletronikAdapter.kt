@@ -9,8 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlineshop.R
 import com.example.onlineshop.model.ProduckEletronikModel
+import com.example.onlineshop.model.ProdukModel
+import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ProdukEletronikAdapter(var arrProduk:ArrayList<ProduckEletronikModel>): RecyclerView.Adapter<ProdukEletronikAdapter.ViewHolder>() {
+class ProdukEletronikAdapter(var arrProduk:ArrayList<ProdukModel>): RecyclerView.Adapter<ProdukEletronikAdapter.ViewHolder>() {
 
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val tvnama = view.findViewById<TextView>(R.id.tv_RvProdukName)
@@ -31,8 +36,9 @@ class ProdukEletronikAdapter(var arrProduk:ArrayList<ProduckEletronikModel>): Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvnama.text = arrProduk[position].name
         holder.tvprice.text = arrProduk[position].harga
-        var imageint = arrProduk[position].gambar
-        holder.image.setImageResource(imageint)
+        holder.tvprice.text = NumberFormat.getCurrencyInstance(Locale("in","ID")).format(Integer.valueOf(arrProduk[position].harga))
+        val image ="http://192.168.100.10/OnlineShopLaravel/public/storage/produk/"+arrProduk[position].image
+        Picasso.get().load(image).placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.image)
     }
 
 }

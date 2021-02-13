@@ -1,10 +1,10 @@
 package com.example.onlineshop.Fragment
 
 import android.os.Bundle
-import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +14,12 @@ import com.example.onlineshop.Adapter.ProdukLaptopAdapter
 import com.example.onlineshop.Adapter.ProdukTerlarisAdapter
 import com.example.onlineshop.Adapter.SlidePhotoAdapter
 import com.example.onlineshop.R
-import com.example.onlineshop.model.ProduckEletronikModel
+import com.example.onlineshop.app.ApiConfig
+import com.example.onlineshop.model.ProdukModel
+import com.example.onlineshop.model.ResponseModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment:Fragment() {
 
@@ -23,6 +28,8 @@ class HomeFragment:Fragment() {
     lateinit var RvProdukTeralris:RecyclerView
     lateinit var RvProdukLaptop:RecyclerView
 
+   private var listProduk:ArrayList<ProdukModel> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,12 +37,33 @@ class HomeFragment:Fragment() {
 
         val view:View =  inflater.inflate(R.layout.fragment_home, container, false)
         slider(view)
-        rvElectronik(view)
-        rvTerlaris(view)
-        rvLaptop(view)
+        init(view)
+        getProduck()
         return  view
     }
+    fun init(view: View){
+        RvProdukElektro=view.findViewById(R.id.Rv_ProdukEletronik)
+        RvProdukTeralris=view.findViewById(R.id.Rv_ProdukTerlaris)
+        RvProdukLaptop=view.findViewById(R.id.Rv_ProdukLaptop)
+    }
+    fun displayProduk(){
 
+        val layoutmanager = LinearLayoutManager(activity)
+        layoutmanager.orientation = LinearLayoutManager.HORIZONTAL
+        RvProdukElektro.adapter=ProdukEletronikAdapter(listProduk)
+        RvProdukElektro.layoutManager=layoutmanager
+
+        val layoutmanager1 = LinearLayoutManager(activity)
+        layoutmanager1.orientation = LinearLayoutManager.HORIZONTAL
+        RvProdukTeralris.adapter=ProdukTerlarisAdapter(listProduk)
+        RvProdukTeralris.layoutManager=layoutmanager1
+
+        val layoutmanager2 = LinearLayoutManager(activity)
+        layoutmanager2.orientation = LinearLayoutManager.HORIZONTAL
+        RvProdukLaptop.adapter=ProdukLaptopAdapter(listProduk)
+        RvProdukLaptop.layoutManager=layoutmanager2
+
+    }
     fun slider(view:View){
         vp=view.findViewById(R.id.vp_slider)
 
@@ -47,69 +75,23 @@ class HomeFragment:Fragment() {
         val adapterslide = SlidePhotoAdapter(photoslide,activity)
         vp.adapter = adapterslide
     }
-    fun rvElectronik(view:View){
-        RvProdukElektro=view.findViewById(R.id.Rv_ProdukEletronik)
-        val layoutmanager = LinearLayoutManager(activity)
-        layoutmanager.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukElektro.adapter=ProdukEletronikAdapter(arrproduk)
-        RvProdukElektro.layoutManager=layoutmanager
+
+
+    fun getProduck(){
+        ApiConfig.instanceRetrofit.getProduk().enqueue(object:Callback<ResponseModel>{
+            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                Toast.makeText(activity,"Failed To Get Product",Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+                val res = response.body()!!
+                if(res.success==1){
+                    listProduk = res.produks
+                    displayProduk()
+                }
+            }
+
+        })
     }
-    fun rvTerlaris(view:View){
-        RvProdukTeralris=view.findViewById(R.id.Rv_ProdukTerlaris)
-        val layoutmanager1 = LinearLayoutManager(activity)
-        layoutmanager1.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukTeralris.adapter=ProdukTerlarisAdapter(arrproduk)
-        RvProdukTeralris.layoutManager=layoutmanager1
-    }
-    fun rvLaptop(view:View){
-        RvProdukLaptop=view.findViewById(R.id.Rv_ProdukLaptop)
-        val layoutmanager2 = LinearLayoutManager(activity)
-        layoutmanager2.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukLaptop.adapter=ProdukLaptopAdapter(arrproduk1)
-        RvProdukLaptop.layoutManager=layoutmanager2
-    }
-    val arrproduk:ArrayList<ProduckEletronikModel>get() {
-        val arr=ArrayList<ProduckEletronikModel>()
-        val p1 = ProduckEletronikModel()
-        p1.name="Laptop Mackbook Pro 2021"
-        p1.harga="Rp.31.000.000"
-        p1.gambar=R.drawable.rv1
 
-        val p2 = ProduckEletronikModel()
-        p2.name="Laptop Asus ROG"
-        p2.harga="Rp.18.000.000"
-        p2.gambar=R.drawable.rv2
-
-        val p3 = ProduckEletronikModel()
-        p3.name="Laptop Xp Envy"
-        p3.harga="Rp.15.000.000"
-        p3.gambar=R.drawable.rv3
-        arr.add(p1)
-        arr.add(p2)
-        arr.add(p3)
-        return  arr
-    }
-    val arrproduk1:ArrayList<ProduckEletronikModel>get() {
-        val arr=ArrayList<ProduckEletronikModel>()
-        val p1 = ProduckEletronikModel()
-        p1.name="Laptop Tuf Gamming"
-        p1.harga="Rp.11.000.000"
-        p1.gambar=R.drawable.rv3
-
-
-        val p2 = ProduckEletronikModel()
-        p2.name="Laptop AlienWare"
-        p2.harga="Rp.45.000.000"
-        p2.gambar=R.drawable.rv1
-
-        val p3 = ProduckEletronikModel()
-        p3.name="Laptop Msi Limmites"
-        p3.harga="Rp.11.000.000"
-        p3.gambar=R.drawable.rv2
-
-        arr.add(p1)
-        arr.add(p2)
-        arr.add(p3)
-        return  arr
-    }
 }
