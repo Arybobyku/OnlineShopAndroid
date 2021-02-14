@@ -50,17 +50,17 @@ class HomeFragment:Fragment() {
 
         val layoutmanager = LinearLayoutManager(activity)
         layoutmanager.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukElektro.adapter=ProdukEletronikAdapter(listProduk)
+        RvProdukElektro.adapter=ProdukEletronikAdapter(requireActivity(),listProduk)
         RvProdukElektro.layoutManager=layoutmanager
 
         val layoutmanager1 = LinearLayoutManager(activity)
         layoutmanager1.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukTeralris.adapter=ProdukTerlarisAdapter(listProduk)
+        RvProdukTeralris.adapter=ProdukTerlarisAdapter(requireActivity(),listProduk)
         RvProdukTeralris.layoutManager=layoutmanager1
 
         val layoutmanager2 = LinearLayoutManager(activity)
         layoutmanager2.orientation = LinearLayoutManager.HORIZONTAL
-        RvProdukLaptop.adapter=ProdukLaptopAdapter(listProduk)
+        RvProdukLaptop.adapter=ProdukLaptopAdapter(requireActivity(),listProduk)
         RvProdukLaptop.layoutManager=layoutmanager2
 
     }
