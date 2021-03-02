@@ -76,11 +76,24 @@
             android:textSize="20dp"
             android:textColor="@color/purple_700"
             android:text="Produk Elektronik"/>
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerFrameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/Rv_ProdukEletronik"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_produk_elektronik"/>
 
             </LinearLayout>
             <LinearLayout
@@ -95,11 +108,24 @@
                     android:textSize="20dp"
                     android:textColor="@color/purple_700"
                     android:text="Produk Terlairs"/>
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerFrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
                     android:id="@+id/Rv_ProdukTerlaris"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_produk_elektronik"/>
 
             </LinearLayout>
             <LinearLayout
@@ -114,11 +140,24 @@
                     android:textSize="20dp"
                     android:textColor="@color/purple_700"
                     android:text="Produk Laptop"/>
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerFrameLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                    <include layout="@layout/shimmer_layout"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
                     android:id="@+id/Rv_ProdukLaptop"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_produk_elektronik"/>
 
             </LinearLayout>
 

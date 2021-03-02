@@ -17,6 +17,7 @@ import com.example.onlineshop.R
 import com.example.onlineshop.app.ApiConfig
 import com.example.onlineshop.model.ProdukModel
 import com.example.onlineshop.model.ResponseModel
+import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +28,9 @@ class HomeFragment:Fragment() {
     lateinit var RvProdukElektro:RecyclerView
     lateinit var RvProdukTeralris:RecyclerView
     lateinit var RvProdukLaptop:RecyclerView
+    lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    lateinit var shimmerFrameLayout1: ShimmerFrameLayout
+    lateinit var shimmerFrameLayout2 : ShimmerFrameLayout
 
    private var listProduk:ArrayList<ProdukModel> = ArrayList()
 
@@ -45,6 +49,11 @@ class HomeFragment:Fragment() {
         RvProdukElektro=view.findViewById(R.id.Rv_ProdukEletronik)
         RvProdukTeralris=view.findViewById(R.id.Rv_ProdukTerlaris)
         RvProdukLaptop=view.findViewById(R.id.Rv_ProdukLaptop)
+
+        shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout)
+        shimmerFrameLayout1 = view.findViewById(R.id.shimmerFrameLayout1)
+        shimmerFrameLayout2 = view.findViewById(R.id.shimmerFrameLayout2)
+
     }
     fun displayProduk(){
 
@@ -86,6 +95,18 @@ class HomeFragment:Fragment() {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
                 val res = response.body()!!
                 if(res.success==1){
+                    shimmerFrameLayout.stopShimmerAnimation()
+                    shimmerFrameLayout.visibility = View.GONE
+                    RvProdukLaptop.visibility = View.VISIBLE
+
+                    shimmerFrameLayout1.stopShimmerAnimation()
+                    shimmerFrameLayout1.visibility = View.GONE
+                    RvProdukTeralris.visibility = View.VISIBLE
+
+                    shimmerFrameLayout2.stopShimmerAnimation()
+                    shimmerFrameLayout2.visibility = View.GONE
+                    RvProdukElektro.visibility = View.VISIBLE
+
                     listProduk = res.produks
                     displayProduk()
                 }

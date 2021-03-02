@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.onlineshop"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -60,4 +60,6 @@ dependencies {
 
     //display image
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //facebook shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }
